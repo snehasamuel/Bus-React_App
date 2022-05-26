@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useState } from 'react'
 import Header from './Header'
 
@@ -10,8 +11,19 @@ const Entry = () => {
 
 
     const RegValues=(()=>{
-const data={"route":route,"bus":busname,"regno":regno,"owner":owner,"contact":contact}
-console.log(data)
+const data={"route":route,"busname":busname,"register":regno,"owner":owner,"phone":contact}
+
+
+axios.post("http://localhost:8000/api/addbus",data).then((response)=>{
+console.log(response.data)
+if(response.data.status==="success")
+{
+    alert("data inserted successfully")
+}
+else{
+    alert("data insertion failed!!")
+}
+})
     })
   return (
     <div>
