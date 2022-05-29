@@ -10,6 +10,22 @@ console.log(response.data)
 setView(response.data)
 setLoad(false)
 })
+
+const deleteBus=(id)=>{
+  const readId={"_id":id}
+  axios.post("http://localhost:8000/api/delete",readId).then((response)=>{
+console.log(response.data)
+if(response.data.status=="success")
+{
+alert("data deleted successfully")
+}          
+else
+{
+alert("deletion failed")
+}
+})
+
+}
   return (
     <div>
         <Header/>
@@ -30,6 +46,7 @@ setLoad(false)
       <th scope="col">Register Number</th>
       <th scope="col">Owner's Name</th>
       <th scope="col">Contact Number</th>
+      <th scope="col">Delete</th>
       
     </tr>
   </thead>
@@ -42,6 +59,7 @@ setLoad(false)
        <td>{value.register}</td>
        <td>{value.owner}</td>
        <td>{value.phone}</td>
+       <td><button onClick={()=>{deleteBus(value._id)}} className="btn btn-danger">DELETE</button></td>
      </tr>
    })}
    
